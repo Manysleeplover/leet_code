@@ -45,6 +45,12 @@ insert into persons values(3, 'Александр',2);
    2       Иван        Разработчик
    3       Александр   Тестировщик
 
+SELECT persons.id, name, title AS pos_title
+   FROM persons INNER JOIN positions
+   ON persons.pos_id=positions.id;
+
+4. Представим, что в подразделении упразднили должность тестировщика, вместо них идут разработчики. Внести изменения в базу.
+
 
 Получить список всех сотрудников, у которых имя начинается на 'В'
 
