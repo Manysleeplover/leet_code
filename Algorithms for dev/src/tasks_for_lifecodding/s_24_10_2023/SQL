@@ -1,3 +1,7 @@
+https://habr.com/ru/companies/ruvds/articles/487878/
+
+
+
 https://www.db-fiddle.com/
 
 
@@ -56,7 +60,7 @@ SELECT persons.id, name, title AS pos_title
    FROM persons INNER JOIN positions
    ON persons.pos_id=positions.id;
 
-
+6.
 Получить список всех сотрудников, у которых имя начинается на 'В'
 select * from persons where name ilike 'В%';
 
@@ -64,7 +68,7 @@ select * from persons where name ilike 'В%';
 
 
 
-
+7.
 transactions
         date					cash_flow
         2023-01-01		-1000
@@ -108,6 +112,17 @@ create table transactions(
 | 2023-01-07T00:00:00.000Z | 550       | 400   |
 
 
-
-
 select date, cash_flow, sum(cash_flow) over (order by date) from transactions;
+
+8. Получить вторую максимальную  транзакцию
+select max(cash_flow) from transactions where cash_flow != (select max(cash_flow) from transactions)
+
+SELECT
+    coalesce(
+        (SELECT DISTINCT cash_flow
+        FROM transactions
+        ORDER BY cash_flow DESC
+        LIMIT 1 OFFSET 1
+        ), null) as result
+FROM transactions
+LIMIT 1
