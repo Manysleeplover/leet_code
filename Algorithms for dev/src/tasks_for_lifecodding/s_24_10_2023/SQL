@@ -76,3 +76,16 @@ transactions
         2023-01-01		    -1000						-1000
         2023-01-02		    -100						-1100
         2023-01-03		     50							-1050
+
+
+create table transactions(
+	date date,
+  	cash_flow int
+);
+
+insert into transactions values('2023-01-01', -1000);
+insert into transactions values('2023-01-02', -100);
+insert into transactions values('2023-01-03', 50);
+
+
+select date, cash_flow, sum(cash_flow) over (order by date) from transactions;
