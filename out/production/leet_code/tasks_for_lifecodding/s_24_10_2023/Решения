@@ -1,0 +1,90 @@
+1.
+       Department department = new Department();
+       department.addEmployee(new Employee("f1", "l1", 100000.0));
+       department.addEmployee(new Employee("f2", "l2", 10000.0));
+       department.addEmployee(new Employee("f3", "l3", 1000.0));
+       DoubleSummaryStatistics collect = department.getEmployees().stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+       System.out.println(collect);
+
+2.
+       String randomChars = "asdfzxcvasdfqwer";
+       Optional<String> string = Optional.ofNullable(randomChars);
+       Map<String, Long> stringLongMap = string
+               .map(item -> item
+                       .chars()
+                       .mapToObj(Character::toChars)
+                       .collect(Collectors.groupingBy(String::valueOf, Collectors.counting())))
+               .orElse(Collections.emptyMap());
+       System.out.println(stringLongMap);
+
+3.1 - ничего, потому что нет терминальной операции
+3.2 - 3,3,2,2,1,1 - сработает труба, и каждый элемент последовательно пройдёт через оба саута
+3.3 - сначала в порядке убывания, потому в порядке возрастания, т.к. sorted - stateful операция и меняет состояние потока
+
+4
+Дан массив ints. Что здесь не так?
+int[] values = {1, 4, 9, 16};
+var stream = Stream.of(values);
+stream.forEach(item -> System.out.println(item));
+Здесь будет выведена ссылка на int[], как преобразовать это в stream?
+
+5
+Напишите функцию, которая принимает на вход канал состоящий из последовательности чисел,
+первое из которых является количеством последующих элементов, которые нужно поместить в массив,
+а за ней следуют элементы этого массива, и возвращающая отдельные массивы.
+Например 3, 4, 0, 2, 1, 2, 2, 4, 5 будет превращено в [4, 0, 2], [2], [4, 5].
+Вернуть пустой лист в противном случае.
+
+    public static List<List<Integer>> getArrays(int[] arr) {
+        List<List<Integer>> list = new ArrayList<>();
+
+        for (int i = 0; i < arr.length; i += arr[i] + 1) {
+            if (arr[i] < 1) {
+                return new ArrayList<>(list);
+            }
+            int targetCount = arr[i];
+            int count = 0;
+            int j = i + 1;
+            List<Integer> innerList = new ArrayList<>();
+            while (count < targetCount) {
+                innerList.add(arr[j]);
+                count++;
+                j++;
+            }
+            list.add(innerList);
+        }
+        return list;
+    }
+
+        /**
+         * Метод-обёртка, вызывающий целевой метод.
+         * Мапит лист в очередь, и закидывает внутренюю очередь для промежуточного результата
+         *
+         * @param integerList - лист на вход
+         * @return - Ожидаемая очередь листов
+         */
+        public static ConcurrentLinkedQueue<List<Integer>> getArrays(List<Integer> integerList) {
+            return processQueue(new ConcurrentLinkedQueue<>(integerList), new ConcurrentLinkedQueue<>());
+        }
+
+        /**
+         * Целевой метод
+         *
+         * @param integers   - исходные данные
+         * @param outerQueue - очередь с ожидаемыми массивами
+         * @return - возвращает целевую очередь или вызывает сам себя, если исходные данные не кончились
+         */
+        private static ConcurrentLinkedQueue<List<Integer>> processQueue(ConcurrentLinkedQueue<Integer> integers,
+                                                                         ConcurrentLinkedQueue<List<Integer>> outerQueue) {
+            if (integers.isEmpty()) {
+                return outerQueue;
+            }
+            outerQueue.offer(integers
+                    .parallelStream()
+                    .limit(integers.poll())
+                    .filter(integers::remove)
+                    .collect(Collectors.toList()));
+            return processQueue(integers, outerQueue);
+        }
+
+
