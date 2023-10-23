@@ -50,9 +50,15 @@ SELECT persons.id, name, title AS pos_title
    ON persons.pos_id=positions.id;
 
 4. Представим, что в подразделении упразднили должность тестировщика, вместо них идут разработчики. Внести изменения в базу.
+update persons set pos_id = 3 where pos_id = 2;
+delete from positions where title = 'Тестировщик';
+SELECT persons.id, name, title AS pos_title
+   FROM persons INNER JOIN positions
+   ON persons.pos_id=positions.id;
 
 
 Получить список всех сотрудников, у которых имя начинается на 'В'
+select * from persons where name ilike 'В%';
 
 
 
