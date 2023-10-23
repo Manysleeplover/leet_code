@@ -1,0 +1,66 @@
+https://www.db-fiddle.com/
+
+
+person
+id      name        pos_id
+1       Владимир    1
+2       Иван        3
+3       Александр   2
+
+positions
+id      title
+1       Дизайнер
+2       Тестировщик
+3       Разработчик
+
+
+
+1. Написать create script
+2. Написать insert script
+
+create table positions(
+	id bigserial primary key,
+    title varchar(32)
+);
+
+create table persons(
+	id bigserial primary key,
+  	name varchar(32),
+  	pos_id bigint,
+  	foreign key(pos_id) references positions(id)
+);
+
+insert into positions values(1, 'Дизайнер');
+insert into positions values(2, 'Тестировщик');
+insert into positions values(3, 'Разработчик');
+
+
+insert into persons values(1, 'Владимир',1);
+insert into persons values(2, 'Иван',3);
+insert into persons values(3, 'Александр',2);
+
+3. получить результат в виде таблицы
+   id      name        pos_title
+   1       Владимир    Дизайнер
+   2       Иван        Разработчик
+   3       Александр   Тестировщик
+
+
+Получить список всех сотрудников, у которых имя начинается на 'В'
+
+
+
+
+
+
+transactions
+        date					cash_flow
+        2023-01-01		-1000
+        2023-01-02		-100
+        2023-01-03		 50
+
+получить нарастающий итог для денежного потока каждый день таким образом, чтобы в конечном итоге получилась таблица
+        date					cash_flow				    cumulative_cf
+        2023-01-01		    -1000						-1000
+        2023-01-02		    -100						-1100
+        2023-01-03		     50							-1050
