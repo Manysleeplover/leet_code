@@ -1,7 +1,7 @@
 https://habr.com/ru/companies/ruvds/articles/487878/
 
 
-
+https://pgexercises.com/questions/basic/selectall.html
 https://www.db-fiddle.com/
 
 
@@ -76,20 +76,12 @@ transactions
         2023-01-03		 50
 
 получить нарастающий итог для денежного потока каждый день таким образом, чтобы в конечном итоге получилась таблица
-        date					cash_flow				    cumulative_cf
+        date					cash_flow				 sum
         2023-01-01		    -1000						-1000
         2023-01-02		    -100						-1100
         2023-01-03		     50							-1050
 
-
 create table transactions(
-	date date,
-  	cash_flow int
-);
-
-**Schema (PostgreSQL v15)**
-
-    create table transactions(
     	date date,
       	cash_flow int
     );
