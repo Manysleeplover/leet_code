@@ -184,3 +184,38 @@ create table books(id uuid not null,
 ('123e4567-e89b-12d3-a456-556642440020', 'Сидоров Сидр Сидорович', 100);
     insert into employee(id, name, salary) values
 ('123e4567-e89b-12d3-a456-556642440030', 'Павлов Павел Павлович', 1500);
+
+
+
+Задача 11
+create table department(
+	id bigserial primary key,
+  name varchar(20)
+);
+
+create table employee(
+	id  bigserial primary key,
+  	department_id bigserial,
+  	chief_id bigserial,
+  	name varchar(100),
+  	salary int,
+  	foreign key(department_id) references department(id),
+  	foreign key(chief_id) references employee(id)
+);
+
+
+insert into department values(1, 'IT');
+
+insert into employee values(1, 1, 1, 'Вася', 100000);
+insert into employee values(2, 1, 1, 'Петя', 120000);
+insert into employee values(3, 1, 1, 'Саша', 90000);
+insert into employee values(4, 1, 1, 'Лёша', 80000);
+insert into employee values(5, 1, 1, 'Никита', 30000);
+insert into employee values(6, 1, 1, 'Артём', 10000);
+
+Вернуть сотрудника, у которого зарплата выше чем у шефа
+select a.*
+from   employee a, employee b
+where  b.id = a.chief_id
+and    a.salary > b.salary
+
