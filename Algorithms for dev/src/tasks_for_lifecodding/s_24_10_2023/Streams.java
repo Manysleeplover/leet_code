@@ -1,9 +1,13 @@
 package tasks_for_lifecodding.s_24_10_2023;
 
+import java.util.stream.IntStream;
+
 public class Streams {
 
 
     public static void main(String[] args) {
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
+        IntStream.range(0, arr.length).filter(i -> i % 2 == 0).forEach(item -> System.out.println(arr[item]));
     }
 
 /*
@@ -21,7 +25,8 @@ public class Streams {
 
 //1. Собрать статистику по зарплатам сотрудников в заданном подразделении. count, sum, max, min, avg
 
-//как отработает следующий код
+
+//2. Как отработает следующий код
 //    final List<String> list = Stream.of("b", "a", "d", "c")
 //            .map(val -> val + "t")
 //            .toList();
@@ -29,31 +34,31 @@ public class Streams {
 //System.out.println(list.size());
 
 
-//2. Посчитать количество вхождений символов в строку используя стримы.
+//3. Посчитать количество вхождений символов в строку используя стримы.
 // public Map<String, Integer> countChars(String randomChars){}
 
 
-//3. Что выведет?  Дано: List<Integer> integers = List.of(3, 2, 1);
-//3.1        integers.stream()
+//4. Что выведет?  Дано: List<Integer> integers = List.of(3, 2, 1);
+//4.1        integers.stream()
 //                .peek(System.out::println);
 
-//3.2        integers.stream()
+//4.2        integers.stream()
 //                .peek(System.out::println)
 //                .forEachOrdered(System.out::println);
 //
 
-//3.3        integers.stream()
+//4.3        integers.stream()
 //                .peek(System.out::println)
 //                .sorted()
 //                .forEach(System.out::println);
 
 
-//4       Дан массив ints. Что здесь не так?
+//5       Дан массив ints. Что появится в консоли?
 //        int[] values = {1, 4, 9, 16};
 //        var stream = Stream.of(values);
 //        stream.forEach(item -> System.out.println(item));
 
-//5
+//6
 //  Напишите функцию, которая принимает на вход массив состоящий из последовательности чисел,
 //  первое из которых является количеством последующих элементов, которые нужно поместить в массив,
 //  а за ней следуют элементы этого массива, и возвращающая отдельные массивы.
@@ -61,7 +66,7 @@ public class Streams {
 //
 
 
-// 6
+// 7
 // * Дан целочисленный массив. Вернуть наибольший к-элемент
 //    Input: nums = [3,2,1,5,6,4], k = 2
 //    Output: 5
@@ -72,10 +77,15 @@ public class Streams {
 //    }
 //
 //    public static int nLargestNumber(int[] nums, int n) {
-//        Arrays.sort(nums);
-//        return nums[nums.length - n];
 //    }
 //}
+
+//8
+// Дан массив int[] arr = new int[]{1,2,3,4,5,6,7,8,9}
+// Вывести только нечётный элементы массива
+
+
+
 }
 
 
