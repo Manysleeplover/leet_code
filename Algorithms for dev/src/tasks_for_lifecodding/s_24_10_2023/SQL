@@ -180,19 +180,20 @@ create table books(id uuid not null,
 
 
 Задача 11
+Вернуть сотрудника, у которого зарплата выше чем у шефа
 create table department(
 	id bigserial primary key,
-  name varchar(20)
+    name varchar(20)
 );
 
 create table employee(
 	id  bigserial primary key,
+	foreign key(department_id) references department(id),
+    foreign key(chief_id) references employee(id),
   	department_id bigserial,
   	chief_id bigserial,
   	name varchar(100),
-  	salary int,
-  	foreign key(department_id) references department(id),
-  	foreign key(chief_id) references employee(id)
+  	salary int
 );
 
 
@@ -205,7 +206,7 @@ insert into employee values(4, 1, 1, 'Лёша', 80000);
 insert into employee values(5, 1, 1, 'Никита', 30000);
 insert into employee values(6, 1, 1, 'Артём', 10000);
 
-Вернуть сотрудника, у которого зарплата выше чем у шефа
+
 select a.*
 from   employee a, employee b
 where  b.id = a.chief_id

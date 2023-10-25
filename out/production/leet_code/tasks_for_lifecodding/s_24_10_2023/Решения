@@ -87,4 +87,9 @@ stream.forEach(item -> System.out.println(item));
             return processQueue(integers, outerQueue);
         }
 
+//8
+// Дан массив int[] arr = new int[]{1,2,3,4,5,6,7,8,9}
+// Вывести только нечётный элементы массива
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
+        IntStream.range(0, arr.length).filter(i -> i % 2 == 0).forEach(item -> System.out.println(arr[item]));
 

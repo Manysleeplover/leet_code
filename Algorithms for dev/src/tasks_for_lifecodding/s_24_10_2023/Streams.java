@@ -1,62 +1,29 @@
 package tasks_for_lifecodding.s_24_10_2023;
 
-import java.util.stream.IntStream;
+import java.util.List;
 
 public class Streams {
 
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
-        IntStream.range(0, arr.length).filter(i -> i % 2 == 0).forEach(item -> System.out.println(arr[item]));
+        List<Integer> integers = List.of(3, 2, 1);
+        integers.stream()
+                .peek(System.out::println);
+        System.out.println();
+
+        integers.stream()
+                .peek(System.out::println)
+                .forEachOrdered(System.out::println);
+        System.out.println();
+
+
+        integers.stream()
+                .peek(System.out::println)
+                .sorted()
+                .forEach(System.out::println);
     }
 
-/*
-    class Department{
-        private String name;
-        private List<Employee>;
-    }
 
-   class Employee{
-        private String firstname;
-        private String lastname;
-        private int salary;
-   }
-*/
-
-//1. Собрать статистику по зарплатам сотрудников в заданном подразделении. count, sum, max, min, avg
-
-
-//2. Как отработает следующий код
-//    final List<String> list = Stream.of("b", "a", "d", "c")
-//            .map(val -> val + "t")
-//            .toList();
-//list.add("w");
-//System.out.println(list.size());
-
-
-//3. Посчитать количество вхождений символов в строку используя стримы.
-// public Map<String, Integer> countChars(String randomChars){}
-
-
-//4. Что выведет?  Дано: List<Integer> integers = List.of(3, 2, 1);
-//4.1        integers.stream()
-//                .peek(System.out::println);
-
-//4.2        integers.stream()
-//                .peek(System.out::println)
-//                .forEachOrdered(System.out::println);
-//
-
-//4.3        integers.stream()
-//                .peek(System.out::println)
-//                .sorted()
-//                .forEach(System.out::println);
-
-
-//5       Дан массив ints. Что появится в консоли?
-//        int[] values = {1, 4, 9, 16};
-//        var stream = Stream.of(values);
-//        stream.forEach(item -> System.out.println(item));
 
 //6
 //  Напишите функцию, которая принимает на вход массив состоящий из последовательности чисел,
@@ -83,7 +50,6 @@ public class Streams {
 //8
 // Дан массив int[] arr = new int[]{1,2,3,4,5,6,7,8,9}
 // Вывести только нечётный элементы массива
-
 
 
 }
