@@ -1,28 +1,73 @@
 package tasks_for_lifecodding.s_24_10_2023;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Streams {
 
 
     public static void main(String[] args) {
-        List<Integer> integers = List.of(3, 2, 1);
-        integers.stream()
-                .peek(System.out::println);
-        System.out.println();
-
-        integers.stream()
-                .peek(System.out::println)
-                .forEachOrdered(System.out::println);
-        System.out.println();
-
-
-        integers.stream()
-                .peek(System.out::println)
-                .sorted()
-                .forEach(System.out::println);
+        Stream<User> userStream = Stream.of(new User());
+        List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
     }
 
+
+
+    static class User {
+
+        private String name;
+        private Integer age;
+        private List<Groups> groups;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public List<Groups> getGroups() {
+            return groups;
+        }
+
+        public void setGroups(List<Groups> groups) {
+            this.groups = groups;
+        }
+    }
+
+    static class Groups {
+
+        private String name;
+        private String description;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+    }
+}
 
 
 //6
@@ -51,7 +96,5 @@ public class Streams {
 // Дан массив int[] arr = new int[]{1,2,3,4,5,6,7,8,9}
 // Вывести только нечётный элементы массива
 
-
-}
 
 
