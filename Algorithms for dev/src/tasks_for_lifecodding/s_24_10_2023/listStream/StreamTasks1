@@ -1,10 +1,15 @@
 /*
-    class Department{
+    @Data
+    static class Department{
         private String name;
         private List<Employee>;
+        public void addEmployee(Employee employee){
+                this.employees.add(employee);
+        }
     }
 
-   class Employee{
+   @Data
+   static class Employee{
         private String firstname;
         private String lastname;
         private int salary;
@@ -24,6 +29,15 @@
 
 //3. Посчитать количество вхождений символов в строку используя стримы.
 // public Map<String, Integer> countChars(String randomChars){}
+
+
+Собрать вот такую конструкцию
+{
+a:4,
+s:3,
+d:2,
+f:2
+}
 
 
 //4. Что выведет?  Дано: List<Integer> integers = List.of(3, 2, 1);

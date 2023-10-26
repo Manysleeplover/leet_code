@@ -1,16 +1,35 @@
 package tasks_for_lifecodding.s_24_10_2023;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Streams {
 
 
     public static void main(String[] args) {
-        Stream<User> userStream = Stream.of(new User());
-        List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
+        String randomChars = "asasadfzxcvasdfqwer";
+        Optional<String> string = Optional.ofNullable(randomChars);
+        Map<String, Long> stringLongMap = string
+                .map(item -> item
+                        .chars()
+                        .mapToObj(Character::toChars)
+                        .collect(Collectors.groupingBy(String::valueOf, Collectors.counting())))
+                .orElse(Collections.emptyMap());
+
+        String collect = stringLongMap.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(entry -> entry.getKey() + ":" + entry.getValue())
+                .collect(Collectors.joining(",\n", "{\n", "\n}"));
+        System.out.println(collect);
+
+
     }
 
 

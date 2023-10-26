@@ -17,6 +17,13 @@
                .orElse(Collections.emptyMap());
        System.out.println(stringLongMap);
 
+               String collect = stringLongMap.entrySet()
+                       .stream()
+                       .filter(entry -> entry.getValue() > 1)
+                       .map(entry -> entry.getKey() + ":" + entry.getValue())
+                       .collect(Collectors.joining(",\n", "{\n", "\n}"));
+               System.out.println(collect);
+
 3.1 - ничего, потому что нет терминальной операции
 3.2 - 3,3,2,2,1,1 - сработает труба, и каждый элемент последовательно пройдёт через оба саута
 3.3 - сначала в порядке убывания, потому в порядке возрастания, т.к. sorted - stateful операция и меняет состояние потока

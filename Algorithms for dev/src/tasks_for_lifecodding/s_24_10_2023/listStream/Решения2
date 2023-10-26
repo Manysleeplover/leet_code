@@ -1,17 +1,29 @@
 1.         long count = Stream.iterate(0, n -> n + 1)
-                   .limit(1783)
-                   .filter(val -> val % 7 == 0)
+                   .limit(1_000_000)
+                   .filter(val -> val % 33 == 0)
                    .count();
            System.out.println(count);
 
-2.         Stream.iterate(new int[]{0, 1}, n -> new int[]{n[1], n[0] + n[1]})
+           long count = IntStream.rangeClosed(0, 1_000_000).filter(i -> i % 33 == 0).count();
+
+
+
+
+2.         Map<Boolean, List<Integer>> collect = IntStream.rangeClosed(0, 10).boxed().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+           Map<Boolean, List<Integer>> collect = IntStream.rangeClosed(0, 10).boxed().collect(Collectors.groupingBy(i -> i % 2 == 0));
+
+
+
+
+
+3.         Stream.iterate(new int[]{0, 1}, n -> new int[]{n[1], n[0] + n[1]})
                    .limit(20)
                    .map(n -> n[0])
                    .forEach(System.out::println);
 
-3.         Stream<String> stringStream = Stream.of("a", "b", "c").filter(element -> element.contains("b"));
+4.         Stream<String> stringStream = Stream.of("a", "b", "c").filter(element -> element.contains("b"));
            System.out.println(stringStream.findAny());
            System.out.println(stringStream.findFirst());
 
 
-4.    List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
+5.    List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
