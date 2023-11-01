@@ -27,3 +27,18 @@
 
 
 5.    List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
+
+
+       Map<Integer, String> collect = Stream.of("swtt5fs9dg", "sd1fs7df", "sd2gwert7dg")
+                .collect(Collectors
+                        .groupingBy(string -> string
+                                        .chars()
+                                        .filter(Character::isDigit)
+                                        .mapToObj(Character::toChars)
+                                        .mapToInt(ch -> Integer.parseInt(String.valueOf(ch))).sum(),
+                                TreeMap::new,
+                                Collectors.mapping(string -> string
+                                        .chars()
+                                        .filter(value -> !Character.isDigit(value))
+                                        .mapToObj(Character::toChars)
+                                        .map(String::valueOf).collect(Collectors.joining()), Collectors.joining())));

@@ -2,7 +2,7 @@
     @Data
     static class Department{
         private String name;
-        private List<Employee>;
+        private List<Employee> employees = new ArrayList<>();
         public void addEmployee(Employee employee){
                 this.employees.add(employee);
         }
@@ -28,7 +28,7 @@
 
 
 //3. Посчитать количество вхождений символов в строку используя стримы.
-// public Map<String, Integer> countChars(String randomChars){}
+// public static Map<String, Long> countChars(String randomChars){}
 
 
 Собрать вот такую конструкцию
@@ -56,7 +56,7 @@ f:2
 
 
 //5       Дан массив ints. Что появится в консоли?
-//        int[] values = {1, 4, 9, 16};
+//        int[] values = new int[]{1, 4, 9, 16};
 //        var stream = Stream.of(values);
 //        stream.forEach(item -> System.out.println(item));
 

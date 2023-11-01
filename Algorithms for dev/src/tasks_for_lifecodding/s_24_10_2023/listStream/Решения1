@@ -1,13 +1,13 @@
 1.
        Department department = new Department();
-       department.addEmployee(new Employee("f1", "l1", 100000.0));
-       department.addEmployee(new Employee("f2", "l2", 10000.0));
-       department.addEmployee(new Employee("f3", "l3", 1000.0));
+       department.addEmployee(new Employee("f1", "l1", 100000));
+       department.addEmployee(new Employee("f2", "l2", 10000));
+       department.addEmployee(new Employee("f3", "l3", 1000));
        DoubleSummaryStatistics collect = department.getEmployees().stream().collect(Collectors.summarizingDouble(Employee::getSalary));
        System.out.println(collect);
 
 2.
-       String randomChars = "asdfzxcvasdfqwer";
+       String randomChars = "abbcccdddd";
        Optional<String> string = Optional.ofNullable(randomChars);
        Map<String, Long> stringLongMap = string
                .map(item -> item
@@ -40,7 +40,7 @@ stream.forEach(item -> System.out.println(item));
 первое из которых является количеством последующих элементов, которые нужно поместить в массив,
 а за ней следуют элементы этого массива, и возвращающая отдельные массивы.
 Например 3, 4, 0, 2, 1, 2, 2, 4, 5 будет превращено в [4, 0, 2], [2], [4, 5].
-Вернуть пустой лист в противном случае.
+
 
     public static List<List<Integer>> getArrays(int[] arr) {
         List<List<Integer>> list = new ArrayList<>();

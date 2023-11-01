@@ -2,7 +2,7 @@
 
 
 
-2. Сгруппировать элементу по признаку четности в Map<Boolean, List<Integer>>
+2. Сгруппировать чилса от 0 до 10 по признаку четности в Map<Boolean, List<Integer>>
 
 
 
@@ -33,3 +33,5 @@
    public static List<User> getUsers(Stream<User> userStream) {
 
    }
+
+   6.        /*"sd1fs7df", "sd5fs9dg", "sd2gs7dg" ->  "8 sdgsdg", "9sdfsdg", " 14sdfsdf";*/

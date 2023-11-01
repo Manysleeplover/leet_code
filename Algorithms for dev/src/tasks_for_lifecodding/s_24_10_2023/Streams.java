@@ -1,9 +1,6 @@
 package tasks_for_lifecodding.s_24_10_2023;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,25 +10,29 @@ public class Streams {
 
 
     public static void main(String[] args) {
-        String randomChars = "asasadfzxcvasdfqwer";
-        Optional<String> string = Optional.ofNullable(randomChars);
-        Map<String, Long> stringLongMap = string
-                .map(item -> item
-                        .chars()
-                        .mapToObj(Character::toChars)
-                        .collect(Collectors.groupingBy(String::valueOf, Collectors.counting())))
-                .orElse(Collections.emptyMap());
+        /*"sd1fs7df", "sd5fs9dg", "sd2gs7dg" ->  "8 sdgsdg", "9sdfsdg", " 14sdfsdf";*/
+        Map<Integer, String> collect = Stream.of("swtt5fs9dg", "sd1fs7df", "sd2gwert7dg")
+                .collect(Collectors
+                        .groupingBy(string -> string
+                                        .chars()
+                                        .filter(Character::isDigit)
+                                        .mapToObj(Character::toChars)
+                                        .mapToInt(ch -> Integer.parseInt(String.valueOf(ch))).sum(),
+                                TreeMap::new,
+                                Collectors.mapping(string -> string
+                                        .chars()
+                                        .filter(value -> !Character.isDigit(value))
+                                        .mapToObj(Character::toChars)
+                                        .map(String::valueOf).collect(Collectors.joining()), Collectors.joining())));
 
-        String collect = stringLongMap.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 1)
-                .map(entry -> entry.getKey() + ":" + entry.getValue())
-                .collect(Collectors.joining(",\n", "{\n", "\n}"));
+
         System.out.println(collect);
-
 
     }
 
+    public static String replaceAllDigit(String string) {
+        return string.replaceAll("\\d", "");
+    }
 
 
     static class User {
