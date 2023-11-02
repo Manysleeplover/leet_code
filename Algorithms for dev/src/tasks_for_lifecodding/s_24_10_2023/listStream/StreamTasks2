@@ -26,7 +26,6 @@
 
        private String name;
        private String description;
-
    }
 
    //вернуть список user у которых группа начинается на "x"
@@ -34,4 +33,9 @@
 
    }
 
-   6.        /*"sd1fs7df", "sd5fs9dg", "sd2gs7dg" ->  "8 sdgsdg", "9sdfsdg", " 14sdfsdf";*/
+   6.        /*"sd1fs7df", "sd5fs9dg", "sd2gs7dg" ->  "8="sdfsdf", 9="sdgsdg",14="sdfsdg", */
+   7  //Напишите программу на Java для группировку сумм чётных и нечётных чисел в списке с использованием Stream APi.
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+   8.      Напишите программу для вывода чисел, которые встречаются больше одного раза в формате k=v
+           List < Integer > nums = Arrays.asList(10, 23, 22, 23, 24, 24, 33, 15, 26, 15);
+   9.Сортировка списка строк в порядке возрастания и убывания

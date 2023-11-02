@@ -10,7 +10,7 @@ public class Streams {
 
 
     public static void main(String[] args) {
-        /*"sd1fs7df", "sd5fs9dg", "sd2gs7dg" ->  "8 sdgsdg", "9sdfsdg", " 14sdfsdf";*/
+        // Напишите программу для вывода чисел, которые встречаются больше одного раза в формате k=v
         Map<Integer, String> collect = Stream.of("swtt5fs9dg", "sd1fs7df", "sd2gwert7dg")
                 .collect(Collectors
                         .groupingBy(string -> string
@@ -24,68 +24,7 @@ public class Streams {
                                         .filter(value -> !Character.isDigit(value))
                                         .mapToObj(Character::toChars)
                                         .map(String::valueOf).collect(Collectors.joining()), Collectors.joining())));
-
-
         System.out.println(collect);
-
-    }
-
-    public static String replaceAllDigit(String string) {
-        return string.replaceAll("\\d", "");
-    }
-
-
-    static class User {
-
-        private String name;
-        private Integer age;
-        private List<Groups> groups;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Integer getAge() {
-            return age;
-        }
-
-        public void setAge(Integer age) {
-            this.age = age;
-        }
-
-        public List<Groups> getGroups() {
-            return groups;
-        }
-
-        public void setGroups(List<Groups> groups) {
-            this.groups = groups;
-        }
-    }
-
-    static class Groups {
-
-        private String name;
-        private String description;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
     }
 }
 
