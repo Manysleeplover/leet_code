@@ -20,7 +20,7 @@ public class Judge implements Runnable {
         if (signs.size() > 2 || signs.size() == 1) {
             System.out.println("Никто не выиграл");
             try {
-                exchanger.exchange(-1l);
+                exchanger.exchange(-1L);
                 return;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -32,8 +32,7 @@ public class Judge implements Runnable {
         if (winnerPlayersMoves.size() != 1) {
             System.out.println("Никто не выиграл");
             try {
-                exchanger.exchange(-1l);
-                return;
+                exchanger.exchange(-1L);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -52,15 +51,9 @@ public class Judge implements Runnable {
         SignEnum second = signs.get(1).getSignEnum();
         SignEnum winner = null;
         switch (first) {
-            case rock -> {
-                winner = second == SignEnum.scissors ? first : second;
-            }
-            case paper -> {
-                winner = second == SignEnum.rock ? first : second;
-            }
-            case scissors -> {
-                winner = second == SignEnum.paper ? first : second;
-            }
+            case rock -> winner = second == SignEnum.scissors ? first : second;
+            case paper -> winner = second == SignEnum.rock ? first : second;
+            case scissors -> winner = second == SignEnum.paper ? first : second;
         }
         return winner;
     }
