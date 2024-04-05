@@ -30,7 +30,10 @@ public class RockPaperScissors {
 
         ExecutorService executorService = Executors.newFixedThreadPool(countOfThreads);
 
+        long countOfGames = 0;
         while (!idScoreMap.containsValue(countOfWins)) {
+            countOfGames++;
+            playersMove.clear();
             for (Player player : playersList) {
                 executorService.submit(player);
             }
@@ -42,6 +45,7 @@ public class RockPaperScissors {
                 .stream()
                 .map(entry -> "Id: " + entry.getKey() + ", Очки: " + entry.getValue())
                 .collect(Collectors.joining("\n")));
+        System.out.println("Количество игр: " + countOfGames);
 
         System.exit(0);
     }

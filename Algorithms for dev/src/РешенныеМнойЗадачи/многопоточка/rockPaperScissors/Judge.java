@@ -6,22 +6,21 @@ import java.util.concurrent.Exchanger;
 
 public class Judge implements Runnable {
 
-    private final List<PlayersMove> playersSigns;
+    private final List<PlayersMove> playersMove;
     private final Exchanger<Long> exchanger;
 
-    public Judge(List<PlayersMove> playersSigns, Exchanger<Long> exchanger) {
-        this.playersSigns = playersSigns;
+    public Judge(List<PlayersMove> playersMove, Exchanger<Long> exchanger) {
+        this.playersMove = playersMove;
         this.exchanger = exchanger;
     }
 
     @Override
     public void run() {
-        HashSet<PlayersMove> signs = new HashSet<>(playersSigns);
+        HashSet<PlayersMove> signs = new HashSet<>(playersMove);
         if (signs.size() > 2 || signs.size() == 1) {
             System.out.println("Никто не выиграл");
             try {
                 exchanger.exchange(-1l);
-                playersSigns.clear();
                 return;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -29,12 +28,11 @@ public class Judge implements Runnable {
 
         }
         SignEnum judgeDecision = getJudgeDecision(List.copyOf(signs));
-        List<PlayersMove> winnerPlayersMoves = playersSigns.stream().filter(sign -> sign.getSignEnum().equals(judgeDecision)).toList();
+        List<PlayersMove> winnerPlayersMoves = playersMove.stream().filter(sign -> sign.getSignEnum().equals(judgeDecision)).toList();
         if (winnerPlayersMoves.size() != 1) {
             System.out.println("Никто не выиграл");
             try {
                 exchanger.exchange(-1l);
-                playersSigns.clear();
                 return;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
