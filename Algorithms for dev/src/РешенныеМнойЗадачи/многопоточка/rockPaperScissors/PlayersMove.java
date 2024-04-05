@@ -4,8 +4,8 @@ package РешенныеМнойЗадачи.многопоточка.rockPaperS
 import java.util.Objects;
 
 public class PlayersMove {
-    private long playersId;
-    private SignEnum signEnum;
+    private final long playersId;
+    private final SignEnum signEnum;
 
     public PlayersMove(long playersId, SignEnum signEnum) {
         this.playersId = playersId;
