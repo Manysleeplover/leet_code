@@ -28,7 +28,7 @@ public class Judge implements Runnable {
 
         }
         SignEnum judgeDecision = getJudgeDecision(List.copyOf(signs));
-        List<PlayersMove> winnerPlayersMoves = playersMove.stream().filter(sign -> sign.getSignEnum().equals(judgeDecision)).toList();
+        List<PlayersMove> winnerPlayersMoves = playersMove.stream().filter(sign -> sign.signEnum().equals(judgeDecision)).toList();
         if (winnerPlayersMoves.size() != 1) {
             System.out.println("Никто не выиграл");
             try {
@@ -38,8 +38,8 @@ public class Judge implements Runnable {
             }
         } else {
             try {
-                exchanger.exchange(winnerPlayersMoves.get(0).getPlayersId());
-                System.out.println("Победил игрок: " + winnerPlayersMoves.get(0).getPlayersId());
+                exchanger.exchange(winnerPlayersMoves.get(0).playersId());
+                System.out.println("Победил игрок: " + winnerPlayersMoves.get(0).playersId());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -47,8 +47,8 @@ public class Judge implements Runnable {
     }
 
     private SignEnum getJudgeDecision(List<PlayersMove> signs) {
-        SignEnum first = signs.get(0).getSignEnum();
-        SignEnum second = signs.get(1).getSignEnum();
+        SignEnum first = signs.get(0).signEnum();
+        SignEnum second = signs.get(1).signEnum();
         SignEnum winner = null;
         switch (first) {
             case rock -> winner = second == SignEnum.scissors ? first : second;

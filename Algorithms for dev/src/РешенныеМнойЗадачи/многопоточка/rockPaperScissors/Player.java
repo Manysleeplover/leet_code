@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-class Player implements Runnable {
+public class Player implements Runnable {
     private final List<PlayersMove> playersMove;
     private final CyclicBarrier cyclicBarrier;
 
@@ -17,10 +17,10 @@ class Player implements Runnable {
     public void run() {
         int signNumber = (int) (Math.random() * 3);
         SignEnum sign = SignEnum.getSign(signNumber);
-        playersMove.add(new PlayersMove(Thread.currentThread().getId(), sign));
+        playersMove.add(new PlayersMove(Thread.currentThread().threadId(), sign));
         try {
             Thread.sleep(100 + (long) (Math.random() * (200 - 100)));
-            System.out.println(Thread.currentThread().getId() + " сыграл: " + sign);
+            System.out.println(Thread.currentThread().threadId() + " сыграл: " + sign);
             cyclicBarrier.await();
         } catch (InterruptedException | BrokenBarrierException e) {
             System.out.println("Барьер сломан");

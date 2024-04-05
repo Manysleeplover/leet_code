@@ -1,6 +1,6 @@
 package РешенныеМнойЗадачи.многопоточка.rockPaperScissors;
 
-enum SignEnum {
+public enum SignEnum {
     rock(0), paper(1), scissors(2);
 
     SignEnum(int signNumber) {}

@@ -3,23 +3,7 @@ package РешенныеМнойЗадачи.многопоточка.rockPaperS
 
 import java.util.Objects;
 
-public class PlayersMove {
-    private final long playersId;
-    private final SignEnum signEnum;
-
-    public PlayersMove(long playersId, SignEnum signEnum) {
-        this.playersId = playersId;
-        this.signEnum = signEnum;
-    }
-
-    public long getPlayersId() {
-        return playersId;
-    }
-
-    public SignEnum getSignEnum() {
-        return signEnum;
-    }
-
+record PlayersMove(long playersId, SignEnum signEnum) {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,13 +15,5 @@ public class PlayersMove {
     @Override
     public int hashCode() {
         return Objects.hash(signEnum);
-    }
-
-    @Override
-    public String toString() {
-        return "PlayersMove{" +
-                "playersId=" + playersId +
-                ", signEnum=" + signEnum +
-                '}';
     }
 }
