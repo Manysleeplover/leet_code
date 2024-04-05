@@ -1,7 +1,10 @@
 package РешенныеМнойЗадачи.многопоточка.rockPaperScissors;
 
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Exchanger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class RockPaperScissors {
@@ -9,7 +12,7 @@ public class RockPaperScissors {
 
     public static void main(String[] args) throws InterruptedException {
         RockPaperScissors rockPaperScissors = new RockPaperScissors();
-        rockPaperScissors.startGame(3, 5);
+        rockPaperScissors.startGame(2, 5);
     }
 
 
@@ -22,7 +25,7 @@ public class RockPaperScissors {
 
         List<Player> playersList = new ArrayList<>();
         for (int i = 0; i < countOfThreads; i++) {
-            playersList.add(new Player(i, playersMove, cyclicBarrier));
+            playersList.add(new Player(playersMove, cyclicBarrier));
         }
 
         ExecutorService executorService = Executors.newFixedThreadPool(countOfThreads);
@@ -39,6 +42,7 @@ public class RockPaperScissors {
                 .stream()
                 .map(entry -> "Id: " + entry.getKey() + ", Очки: " + entry.getValue())
                 .collect(Collectors.joining("\n")));
+
         System.exit(0);
     }
 }

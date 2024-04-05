@@ -16,16 +16,8 @@ public class PlayersMove {
         return playersId;
     }
 
-    public void setPlayersId(long playersId) {
-        this.playersId = playersId;
-    }
-
     public SignEnum getSignEnum() {
         return signEnum;
-    }
-
-    public void setSignEnum(SignEnum signEnum) {
-        this.signEnum = signEnum;
     }
 
     @Override
@@ -39,5 +31,13 @@ public class PlayersMove {
     @Override
     public int hashCode() {
         return Objects.hash(signEnum);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayersMove{" +
+                "playersId=" + playersId +
+                ", signEnum=" + signEnum +
+                '}';
     }
 }

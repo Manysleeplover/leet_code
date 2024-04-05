@@ -7,12 +7,8 @@ import java.util.concurrent.CyclicBarrier;
 class Player implements Runnable {
     private final List<PlayersMove> list;
     private final CyclicBarrier cyclicBarrier;
-    private final long id;
 
-
-    public Player(long id, List<PlayersMove> list, CyclicBarrier cyclicBarrier) {
-        this.id = id;
-        Thread.currentThread().setName(id + "");
+    public Player(List<PlayersMove> list, CyclicBarrier cyclicBarrier) {
         this.list = list;
         this.cyclicBarrier = cyclicBarrier;
     }
@@ -31,7 +27,4 @@ class Player implements Runnable {
         }
     }
 
-    public long getId() {
-        return id;
-    }
 }
