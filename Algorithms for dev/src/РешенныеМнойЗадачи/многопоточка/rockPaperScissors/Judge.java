@@ -7,11 +7,11 @@ import java.util.concurrent.Exchanger;
 public class Judge implements Runnable {
 
     private final List<PlayersMove> playersMove;
-    private final Exchanger<Long> exchanger;
+    private final Exchanger<Long> winnerIdExchanger;
 
-    public Judge(List<PlayersMove> playersMove, Exchanger<Long> exchanger) {
+    public Judge(List<PlayersMove> playersMove, Exchanger<Long> winnerIdExchanger) {
         this.playersMove = playersMove;
-        this.exchanger = exchanger;
+        this.winnerIdExchanger = winnerIdExchanger;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Judge implements Runnable {
         if (signs.size() > 2 || signs.size() == 1) {
             System.out.println("Никто не выиграл");
             try {
-                exchanger.exchange(-1L);
+                winnerIdExchanger.exchange(-1L);
                 return;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -32,13 +32,13 @@ public class Judge implements Runnable {
         if (winnerPlayersMoves.size() != 1) {
             System.out.println("Никто не выиграл");
             try {
-                exchanger.exchange(-1L);
+                winnerIdExchanger.exchange(-1L);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         } else {
             try {
-                exchanger.exchange(winnerPlayersMoves.get(0).playersId());
+                winnerIdExchanger.exchange(winnerPlayersMoves.get(0).playersId());
                 System.out.println("Победил игрок: " + winnerPlayersMoves.get(0).playersId());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
