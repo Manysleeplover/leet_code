@@ -11,12 +11,11 @@ public class RockPaperScissors {
 
 
     public static void main(String[] args) throws InterruptedException {
-        RockPaperScissors rockPaperScissors = new RockPaperScissors();
-        rockPaperScissors.startGame(3, 5);
+        startGame(3, 5);
     }
 
 
-    public void startGame(int countOfThreads, int countOfWins) throws InterruptedException {
+    public static void startGame(int countOfThreads, int countOfWins) throws InterruptedException {
         List<PlayersMove> playersMove = Collections.synchronizedList(new ArrayList<>());
         Exchanger<Long> winnerIdExchanger = new Exchanger<>();
 
