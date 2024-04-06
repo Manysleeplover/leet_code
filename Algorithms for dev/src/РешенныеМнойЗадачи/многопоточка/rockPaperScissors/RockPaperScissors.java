@@ -44,7 +44,8 @@ public class RockPaperScissors {
         System.out.println("Счёт:\n" + idScoreMap.entrySet()
                 .stream()
                 .map(entry -> "Id: " + entry.getKey() + ", Очки: " + entry.getValue())
-                .collect(Collectors.joining("\n")));
+                .collect(Collectors.joining("\n"))
+        );
         System.out.println("Количество игр: " + countOfGames);
 
         System.exit(0);
