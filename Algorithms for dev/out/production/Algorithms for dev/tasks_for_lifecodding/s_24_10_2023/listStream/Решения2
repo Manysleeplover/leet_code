@@ -1,0 +1,72 @@
+1.         long count = Stream.iterate(0, n -> n + 1)
+                   .limit(1_000_000)
+                   .filter(val -> val % 33 == 0)
+                   .count();
+           System.out.println(count);
+
+           long count = IntStream.rangeClosed(0, 1_000_000).filter(i -> i % 33 == 0).count();
+
+
+
+
+2.         Map<Boolean, List<Integer>> collect = IntStream.rangeClosed(0, 10).boxed().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+           Map<Boolean, List<Integer>> collect = IntStream.rangeClosed(0, 10).boxed().collect(Collectors.groupingBy(i -> i % 2 == 0));
+
+
+
+
+
+3.         Stream.iterate(new int[]{0, 1}, n -> new int[]{n[1], n[0] + n[1]})
+                   .limit(20)
+                   .map(n -> n[0])
+                   .forEach(System.out::println);
+
+4.         Stream<String> stringStream = Stream.of("a", "b", "c").filter(element -> element.contains("b"));
+           System.out.println(stringStream.findAny());
+           System.out.println(stringStream.findFirst());
+
+
+5.    List<User> x = userStream.filter(user -> user.getGroups().stream().anyMatch(groups -> groups.getName().startsWith("x"))).toList();
+
+
+6.       Map<Integer, String> collect = Stream.of("swtt5fs9dg", "sd1fs7df", "sd2gwert7dg")
+                .collect(Collectors
+                        .groupingBy(string -> string
+                                        .chars()
+                                        .filter(Character::isDigit)
+                                        .mapToObj(Character::toChars)
+                                        .mapToInt(ch -> Integer.parseInt(String.valueOf(ch))).sum(),
+                                TreeMap::new,
+                                Collectors.mapping(string -> string
+                                        .chars()
+                                        .filter(value -> !Character.isDigit(value))
+                                        .mapToObj(Character::toChars)
+                                        .map(String::valueOf).collect(Collectors.joining()), Collectors.joining())));
+
+7.         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+           Map<Boolean, Integer> collect = numbers.stream().collect(Collectors.partitioningBy(digit -> digit % 2 == 0, Collectors.summingInt(digit -> digit)));
+           System.out.println(collect);
+
+8.         // Напишите программу для вывода чисел, которые встречаются больше одного раза в формате k=v
+                   List < Integer > nums = Arrays.asList(10, 23, 22, 23, 24, 24, 33, 15, 26, 15);
+                   Map<Integer, Long> collect = nums
+                           .stream()
+                           .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                           .entrySet()
+                           .stream()
+                           .filter(entry -> entry.getValue() > 1)
+                           .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                   System.out.println(collect);
+
+9.        Сортировка списка строк в порядке возрастания и убывания
+    List < String > colors = Arrays.asList("Red", "Green", "Blue", "Pink", "Brown");
+    System.out.println("Original List of strings(colors): " + colors);
+    // Sort strings in ascending order
+    List < String > ascendingOrder = colors.stream()
+      .sorted()
+      .collect(Collectors.toList());
+
+    // Sort strings in descending order
+    List < String > descendingOrder = colors.stream()
+      .sorted(Comparator.reverseOrder())
+      .collect(Collectors.toList());
