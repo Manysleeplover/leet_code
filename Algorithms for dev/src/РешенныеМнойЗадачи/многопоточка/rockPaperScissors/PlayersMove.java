@@ -3,7 +3,7 @@ package РешенныеМнойЗадачи.многопоточка.rockPaperS
 
 import java.util.Objects;
 
-record PlayersMove(long playersId, SignEnum signEnum) {
+public record PlayersMove(long playersId, SignEnum signEnum) {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
