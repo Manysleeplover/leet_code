@@ -48,6 +48,6 @@ public class RockPaperScissors {
         );
         System.out.println("Количество игр: " + countOfGames);
 
-        System.exit(0);
+        executorService.shutdown();
     }
 }
