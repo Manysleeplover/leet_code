@@ -14,6 +14,12 @@ public class RockPaperScissors {
         startGame(3, 5);
     }
 
+    /**
+     *  Суть такая: игроки синхронизированы с помощью CyclicBarrier. В конце своего хода они вызывают cb.await().
+     *  Последний игрок, кто вызывает .await() становится судьёй и выполняет его функции.
+     *  Судья принимает решение, и вызывая winnerIdExchanger.exchange(id) возвращает в главные поток id победителя или -1 если никто не выиграл.
+     *  Считаем до первых 5 побед, потом глушим executor.
+     */
 
     public static void startGame(int countOfThreads, int countOfWins) throws InterruptedException {
         List<PlayersMove> playersMove = Collections.synchronizedList(new ArrayList<>());
