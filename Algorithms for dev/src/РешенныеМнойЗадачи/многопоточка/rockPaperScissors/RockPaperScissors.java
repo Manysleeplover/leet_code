@@ -22,15 +22,15 @@ public class RockPaperScissors {
      */
 
     public static void startGame(int countOfThreads, int countOfWins) throws InterruptedException {
-        List<PlayersMove> playersMove = Collections.synchronizedList(new ArrayList<>());
+        List<PlayersMove> playersMoves = Collections.synchronizedList(new ArrayList<>());
         Exchanger<Long> winnerIdExchanger = new Exchanger<>();
 
-        Judge judge = new Judge(playersMove, winnerIdExchanger);
+        Judge judge = new Judge(playersMoves, winnerIdExchanger);
         CyclicBarrier cyclicBarrier = new CyclicBarrier(countOfThreads, judge);
 
         List<Player> playersList = new ArrayList<>();
         for (int i = 0; i < countOfThreads; i++) {
-            playersList.add(new Player(playersMove, cyclicBarrier));
+            playersList.add(new Player(playersMoves, cyclicBarrier));
         }
         ExecutorService executorService = Executors.newFixedThreadPool(countOfThreads);
 
@@ -39,7 +39,7 @@ public class RockPaperScissors {
         Map<Long, Integer> idScoreMap = new HashMap<>();
         while (!idScoreMap.containsValue(countOfWins)) {
             countOfGames++;
-            playersMove.clear();
+            playersMoves.clear();
             for (Player player : playersList) {
                 executorService.submit(player);
             }

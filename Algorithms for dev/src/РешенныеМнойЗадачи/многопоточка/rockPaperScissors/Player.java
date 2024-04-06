@@ -5,11 +5,11 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class Player implements Runnable {
-    private final List<PlayersMove> playersMove;
+    private final List<PlayersMove> playersMoves;
     private final CyclicBarrier cyclicBarrier;
 
-    public Player(List<PlayersMove> playersMove, CyclicBarrier cyclicBarrier) {
-        this.playersMove = playersMove;
+    public Player(List<PlayersMove> playersMoves, CyclicBarrier cyclicBarrier) {
+        this.playersMoves = playersMoves;
         this.cyclicBarrier = cyclicBarrier;
     }
 
@@ -17,7 +17,7 @@ public class Player implements Runnable {
     public void run() {
         int signNumber = (int) (Math.random() * 3);
         SignEnum sign = SignEnum.getSign(signNumber);
-        playersMove.add(new PlayersMove(Thread.currentThread().threadId(), sign));
+        playersMoves.add(new PlayersMove(Thread.currentThread().threadId(), sign));
         try {
             Thread.sleep(100 + (long) (Math.random() * (200 - 100)));
             System.out.println(Thread.currentThread().threadId() + " сыграл: " + sign);
