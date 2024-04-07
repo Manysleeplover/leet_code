@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class RockPaperScissors {
 
-
     public static void main(String[] args) throws InterruptedException {
         startGame(3, 5);
     }
@@ -20,7 +19,6 @@ public class RockPaperScissors {
      *  Судья принимает решение, и вызывая winnerIdExchanger.exchange(id) возвращает в главные поток id победителя или -1 если никто не выиграл.
      *  Считаем до первых 5 побед, потом глушим executor.
      */
-
     public static void startGame(int countOfThreads, int countOfWins) throws InterruptedException {
         List<PlayersMove> playersMoves = Collections.synchronizedList(new ArrayList<>());
         Exchanger<Long> winnerIdExchanger = new Exchanger<>();
@@ -33,7 +31,6 @@ public class RockPaperScissors {
             playersList.add(new Player(playersMoves, cyclicBarrier));
         }
         ExecutorService executorService = Executors.newFixedThreadPool(countOfThreads);
-
 
         long countOfGames = 0;
         Map<Long, Integer> idScoreMap = new HashMap<>();

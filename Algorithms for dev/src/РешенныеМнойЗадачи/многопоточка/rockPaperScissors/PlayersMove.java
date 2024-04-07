@@ -1,6 +1,5 @@
 package РешенныеМнойЗадачи.многопоточка.rockPaperScissors;
 
-
 import java.util.Objects;
 
 public record PlayersMove(long playersId, SignEnum signEnum) {
