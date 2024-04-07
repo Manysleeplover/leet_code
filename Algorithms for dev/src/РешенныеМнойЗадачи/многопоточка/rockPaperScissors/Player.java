@@ -26,5 +26,4 @@ public class Player implements Runnable {
             System.out.println("Барьер сломан");
         }
     }
-
 }
