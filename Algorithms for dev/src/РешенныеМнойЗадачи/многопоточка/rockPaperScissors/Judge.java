@@ -52,11 +52,9 @@ public class Judge implements Runnable {
         SignEnum winner = null;
 
         switch (first) {
-
             case rock -> winner = second == SignEnum.scissors ? first : second;
             case paper -> winner = second == SignEnum.rock ? first : second;
             case scissors -> winner = second == SignEnum.paper ? first : second;
-
         }
 
         return winner;
