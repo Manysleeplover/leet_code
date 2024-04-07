@@ -20,6 +20,7 @@ public class Judge implements Runnable {
         if (signs.size() > 2 || signs.size() == 1) {
             exchangeWinnerId(-1L);
             System.out.println("Никто не выиграл");
+            return;
         }
 
         SignEnum judgeDecision = getJudgeDecision(List.copyOf(signs));
