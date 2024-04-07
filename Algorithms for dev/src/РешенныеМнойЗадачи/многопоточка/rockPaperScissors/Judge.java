@@ -18,15 +18,8 @@ public class Judge implements Runnable {
     public void run() {
         HashSet<PlayersMove> signs = new HashSet<>(playersMoves);
         if (signs.size() > 2 || signs.size() == 1) {
-
+            exchangeWinnerId(-1L);
             System.out.println("Никто не выиграл");
-            try {
-                winnerIdExchanger.exchange(-1L);
-                return;
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
         }
 
         SignEnum judgeDecision = getJudgeDecision(List.copyOf(signs));
@@ -35,23 +28,20 @@ public class Judge implements Runnable {
                 .toList();
 
         if (winnerPlayersMoves.size() != 1) {
-
+            exchangeWinnerId(-1);
             System.out.println("Никто не выиграл");
-            try {
-                winnerIdExchanger.exchange(-1L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
 
         } else {
+            exchangeWinnerId(winnerPlayersMoves.get(0).playersId());
+            System.out.println("Победил игрок: " + winnerPlayersMoves.get(0).playersId());
+        }
+    }
 
-            try {
-                winnerIdExchanger.exchange(winnerPlayersMoves.get(0).playersId());
-                System.out.println("Победил игрок: " + winnerPlayersMoves.get(0).playersId());
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
+    private void exchangeWinnerId(long id) {
+        try {
+            winnerIdExchanger.exchange(id);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

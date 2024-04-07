@@ -19,7 +19,7 @@ public class Player implements Runnable {
         SignEnum sign = SignEnum.getSign(signNumber);
         playersMoves.add(new PlayersMove(Thread.currentThread().threadId(), sign));
         try {
-            Thread.sleep(100 + (long) (Math.random() * (200 - 100)));
+            Thread.sleep(250 + (long) (Math.random() * (500 - 250)));
             System.out.println(Thread.currentThread().threadId() + " сыграл: " + sign);
             cyclicBarrier.await();
         } catch (InterruptedException | BrokenBarrierException e) {
